@@ -80,7 +80,7 @@ client.on('messageCreate', async message => {
     // Esinila özel kodlar
     
     if (message.content.toLowerCase() === 'beyza') {
-        message.channel.send('DAVAR');
+        message.channel.send('AVEL');
     }
 
     if (message.content.toLowerCase() === 'asya') {
