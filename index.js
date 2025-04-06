@@ -258,8 +258,8 @@ client.on('messageCreate', async message => {
 
     // Botu yeniden başlatma komutu
     if (message.content.startsWith(`${prefix}restart`)) {
-        if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
-            return message.channel.send('Yetkiniz yetersiz.');
+        if (message.author.id !== '961631861954711654') {
+            return message.channel.send('Bu komutu kullanmak için yetkiniz yok.');
         }
         message.channel.send('Bot yeniden başlatılıyor...').then(() => {
             exec('pm2 restart bot', (error, stdout, stderr) => {
