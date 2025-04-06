@@ -1,5 +1,7 @@
 const { Client, GatewayIntentBits, EmbedBuilder, ActivityType, PermissionsBitField } = require('discord.js');
 const fs = require('fs');
+const { exec } = require('child_process');
+const express = require('express');
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
@@ -191,7 +193,8 @@ client.on('messageCreate', async message => {
                 { name: `${prefix}reklam-engelleme`, value: 'Reklam engellemeyi açar veya kapatır.' },
                 { name: `${prefix}küfür-engelleme`, value: 'Küfür engellemeyi açar veya kapatır.' },
                 { name: `${prefix}prefix [yeni prefix]`, value: 'Komut ön ekini değiştirir.' },
-                { name: `${prefix}whitelist [rol id]`, value: 'Belirtilen rolü whitelist\'e ekler veya çıkarır.' }
+                { name: `${prefix}whitelist [rol id]`, value: 'Belirtilen rolü whitelist\'e ekler veya çıkarır.' },
+                { name: `${prefix}restart`, value: 'Botu yeniden başlatır.' }
             )
             .setColor('#00FF00');
 
@@ -253,6 +256,23 @@ client.on('messageCreate', async message => {
         }
     }
 
+    // Botu yeniden başlatma komutu
+    if (message.content.startsWith(`${prefix}restart`)) {
+        if (!message.member.permissions.has(PermissionsBitField.Flags.Administrator)) {
+            return message.channel.send('Yetkiniz yetersiz.');
+        }
+        message.channel.send('Bot yeniden başlatılıyor...').then(() => {
+            exec('pm2 restart bot', (error, stdout, stderr) => {
+                if (error) {
+                    console.error(`exec error: ${error}`);
+                    return;
+                }
+                console.log(`stdout: ${stdout}`);
+                console.error(`stderr: ${stderr}`);
+            });
+        });
+    }
+
     // Bot etiketlenirse prefix'i göster
     if (message.mentions.has(client.user)) {
         message.channel.send(`Bu sunucudaki prefix: ${prefix}`);
@@ -260,7 +280,6 @@ client.on('messageCreate', async message => {
 });
 
 // Sunucu oluşturma ve proje aktivitesi sağlama.
-const express = require('express');
 const app = express();
 const port = 3000;
 
