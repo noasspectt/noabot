@@ -9,7 +9,7 @@ let isAdBlockingEnabled = true;
 let isProfanityBlockingEnabled = true;
 let prefix = '.'; // Varsayılan prefix
 let whitelistRoles = []; // Whitelisted roles
-const bannedWords = ['aq', 'amk', 'oe', 'amına', 'amına koyayım', 'siktirin', 'siktir', 'sg', 'orospu', 'ananı', 'babanı', 'bacını', 'karını', 'sikeyim', 'allahını', 'amcık', 'feriştah', 'oç']; // Buraya engellenecek küfürleri ekleyin
+const bannedWords = ['aq', 'amk', 'oe', 'amına', 'amına koyayım', 'siktirin', 'siktir', 'sg', 'orospu', 'ananı', 'babanı', 'bacını', 'karını', 'sikeyim', 'allahını', 'amcık', 'feriştah', 'oç', 'göt']; // Buraya engellenecek küfürleri ekleyin
 const adLinks = ['http', 'https']; // Buraya engellenecek reklam linklerini ekleyin
 
 client.once('ready', () => {
