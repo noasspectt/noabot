@@ -88,7 +88,7 @@ client.on('messageCreate', async message => {
     }
     
     if (message.content.toLowerCase() === 'esin') {
-        message.channel.send('HADİTEKRARDANDENE');
+        message.channel.send('DESTUR!');
     }
 
     if (message.content.toLowerCase() === 'klasikko') {
